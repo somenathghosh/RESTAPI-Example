@@ -12,12 +12,11 @@ app.use(bodyParser());
 var port     = process.env.PORT || 8080; // set our port
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'); // connect to our database
+mongoose.connect('mongodb://root:root@novus.modulusmongo.net:27017/qy7nyXog'); // connect to our database
 var Bear     = require('./app/models/bear');
 
 // ROUTES FOR OUR API
 // =============================================================================
-
 // create our router
 var router = express.Router();
 
@@ -30,7 +29,7 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-	res.json({ message: 'hooray! welcome to our api!' });	
+	res.send({ message: 'hooray! welcome to our api!' });	
 });
 
 // on routes that end in /bears
@@ -42,7 +41,7 @@ router.route('/bears')
 		
 		var bear = new Bear();		// create a new instance of the Bear model
 		bear.name = req.body.name;  // set the bears name (comes from the request)
-
+		console.log(req.body.name);
 		bear.save(function(err) {
 			if (err)
 				res.send(err);
